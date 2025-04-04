@@ -1,6 +1,6 @@
 # import sys
 #
-# # #1.1
+# # 1.1
 # num1 = float(sys.stdin.readline().strip())
 # num2 = float(sys.stdin.readline().strip())
 # num3 = float(sys.stdin.readline().strip())
@@ -9,7 +9,7 @@
 #
 # print(f"Минимальное число: {min_num}")
 
-# #1.2
+# # 1.2
 # import sys
 #
 # num1 = float(sys.stdin.readline().strip())
@@ -23,7 +23,7 @@
 #     else:
 #         print(f"Число {num} не попадает в интервал [1, 50]")
 
-# #1.3
+# # 1.3
 # import sys
 #
 # m = float(sys.stdin.readline().strip())
@@ -32,7 +32,7 @@
 #     print(f"{i} * {m} = {i * m}")
 
 
-#1.4
+# 1.4
 import sys
 
 input_data = sys.stdin.readline().strip()
