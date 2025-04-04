@@ -36,7 +36,18 @@
 import sys
 
 input_data = sys.stdin.readline().strip()
-numbers = list(map(int, input_data.split()))
+
+numbers = []
+current_number = ''
+for char in input_data:
+    if char == ' ':
+        if current_number:
+            numbers.append(int(current_number))
+            current_number = ''
+    else:
+        current_number += char
+if current_number:
+    numbers.append(int(current_number))
 
 sum_of_numbers = 0
 count_of_numbers = 0
