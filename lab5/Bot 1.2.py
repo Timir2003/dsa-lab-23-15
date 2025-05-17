@@ -140,16 +140,6 @@ def get_manage_keyboard():
     builder.row(KeyboardButton(text="Отмена"))
     return builder.as_markup(resize_keyboard=True)
 
-def get_dev_keyboard():
-    return ReplyKeyboardMarkup(
-        keyboard=[
-            [KeyboardButton(text="Проверить соединение с БД")],
-            [KeyboardButton(text="Логи бота")],
-            [KeyboardButton(text="Отмена")]
-        ],
-        resize_keyboard=True
-    )
-
 async def set_commands_for_user(user_id: int):
     commands = [
         types.BotCommand(command="start", description="Запустить бота"),
