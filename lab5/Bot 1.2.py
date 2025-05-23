@@ -140,16 +140,6 @@ def get_manage_keyboard():
     builder.row(KeyboardButton(text="Отмена"))
     return builder.as_markup(resize_keyboard=True)
 
-def get_dev_keyboard():
-    return ReplyKeyboardMarkup(
-        keyboard=[
-            [KeyboardButton(text="Проверить соединение с БД")],
-            [KeyboardButton(text="Логи бота")],
-            [KeyboardButton(text="Отмена")]
-        ],
-        resize_keyboard=True
-    )
-
 async def set_commands_for_user(user_id: int):
     commands = [
         types.BotCommand(command="start", description="Запустить бота"),
@@ -323,36 +313,6 @@ async def process_new_currency_rate(message: Message, state: FSMContext):
         await message.answer("🚫 Ошибка: введите число!")
     finally:
         await state.clear()
-
-# ================== МЕНЮ РАЗРАБОТЧИКА ==================
-
-@dp.message(Command('dev_menu'))
-async def cmd_dev_menu(message: Message):
-    if not await is_admin(str(message.from_user.id)):
-        await message.answer("Нет доступа к команде")
-        return
-    await message.answer("Меню разработчика:", reply_markup=get_dev_keyboard())
-
-@dp.message(lambda message: message.text == "Проверить соединение с БД")
-async def check_db_connection(message: Message):
-    conn = None
-    try:
-        conn = await create_db_connection()
-        await conn.execute("SELECT 1")
-        await message.answer("✅ Соединение с БД работает нормально")
-    except Exception as e:
-        await message.answer(f"❌ Ошибка соединения с БД: {str(e)}")
-    finally:
-        if conn:
-            await conn.close()
-
-@dp.message(lambda message: message.text == "Логи бота")
-async def send_bot_logs(message: Message):
-    try:
-        with open("bot.log", "rb") as log_file:
-            await message.answer_document(types.InputFile(log_file, filename="bot_logs.txt"))
-    except Exception as e:
-        await message.answer(f"❌ Не удалось отправить логи: {str(e)}")
 
 # ================== ОБЩИЕ ОБРАБОТЧИКИ ==================
 
